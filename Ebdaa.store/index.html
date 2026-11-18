@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#805b45">
+<title>إبداع | متجر المنتجات اليدوية</title>
+<link rel="icon" type="image/png" href="logo 2.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+ --brown:#805b45;
+ --dark:#493326;
+ --gold:#c49a55;
+ --cream:#fbf7f1;
+ --green:#16864d;
+ --red:#c43c36;
+}
+* {box-sizing:border-box}
+body {
+ margin:0;
+ font-family:Cairo,Arial,sans-serif;
+ background:var(--cream);
+ color:#302923;
+}
+button,input,select,textarea {font:inherit}
+button {cursor:pointer}
+.hidden {display:none!important}
+a {text-decoration:none;color:inherit}
+
+header {
+ position:sticky;top:0;z-index:20;
+ background:white;padding:10px 5%;
+ display:flex;align-items:center;
+ justify-content:space-between;gap:15px;
+ box-shadow:0 2px 12px #0001;
+}
+.brand {
+ display:flex;align-items:center;gap:10px;
+ color:var(--dark);font-size:24px;font-weight:800;
+}
+.logo {
+ width:52px;height:52px;border-radius:50%;
+ object-fit:cover;border:2px solid var(--gold);
+}
+nav {display:flex;gap:18px;flex-wrap:wrap}
+nav a {font-weight:700;cursor:pointer}
+nav a:hover {color:var(--gold)}
+
+.container {width:min(1180px,92%);margin:auto;min-height:70vh}
+.hero {
+ margin:30px 0 45px;padding:65px 7%;
+ min-height:310px;border-radius:22px;
+ display:flex;align-items:center;color:white;
+ background:
+ linear-gradient(100deg,#24170ddd,#24170d55),
+ url("https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1600&q=85") center/cover;
+}
+.hero-content {max-width:650px}
+.hero h1 {font-size:clamp(28px,4vw,45px);margin:5px 0}
+.hero p {line-height:2}
+.eyebrow {color:var(--gold);font-weight:800}
+.hero .eyebrow {color:#f4d7a4}
+
+.btn {
+ border:0;background:var(--brown);color:white;
+ padding:11px 22px;border-radius:9px;font-weight:800;
+}
+.btn:hover {background:var(--dark)}
+.section-title {text-align:center;margin:35px 0 25px}
+.section-title h2 {margin:0;font-size:30px}
+
+.category-grid,.product-grid {
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:18px;margin-bottom:55px;
+}
+.category-card,.product-card {
+ background:white;border:1px solid #eee5dc;
+ border-radius:15px;overflow:hidden;cursor:pointer;
+ transition:.2s;
+}
+.category-card:hover,.product-card:hover {
+ transform:translateY(-4px);
+ box-shadow:0 12px 28px #4a332015;
+}
+.category-card img {
+ width:100%;height:190px;object-fit:cover;
+}
+.category-card div,.product-info {padding:13px}
+.category-card h3,.product-info h3 {margin:0 0 5px}
+.category-card p,.product-info p {
+ color:#77716b;font-size:14px;margin:0;
+}
+.product-card img {width:100%;height:210px;object-fit:cover}
+.product-price {display:block;color:var(--dark);margin-top:10px;font-weight:800}
+
+.products-heading {
+ display:flex;justify-content:space-between;
+ align-items:center;gap:15px;margin:30px 0 20px;
+}
+.back-btn {
+ background:white;border:1px solid #ddd;
+ padding:10px 15px;border-radius:8px;
+}
+.about {
+ background:white;padding:35px;
+ border-radius:18px;margin:35px auto;line-height:2.2;
+}
+.about h1 {color:var(--dark)}
+
+.modal {
+ position:fixed;inset:0;z-index:50;
+ display:grid;place-items:center;padding:15px;
+}
+.backdrop {position:absolute;inset:0;background:#000b}
+.modal-box {
+ position:relative;z-index:1;background:white;
+ width:min(750px,100%);border-radius:17px;
+ overflow:hidden;display:grid;grid-template-columns:1fr 1fr;
+}
+.modal-box img {width:100%;height:100%;min-height:300px;object-fit:cover}
+.modal-info {padding:25px}
+.close {
+ position:absolute;left:10px;top:10px;
+ border:0;background:white;border-radius:50%;
+ width:38px;height:38px;font-size:23px;
+}
+.whatsapp {
+ display:block;background:var(--green);color:white;
+ text-align:center;padding:12px;border-radius:9px;
+ margin-top:18px;font-weight:800;
+}
+
+.admin-wrap {width:min(1050px,92%);margin:30px auto}
+.panel {
+ background:white;border:1px solid #eee5dc;
+ border-radius:14px;padding:22px;margin-bottom:22px;
+}
+.admin-form {
+ display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.admin-form label {display:block;font-weight:700;margin-bottom:6px}
+.admin-form input,.admin-form select,.admin-form textarea {
+ width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;
+}
+.admin-form textarea {min-height:85px}
+.full {grid-column:1/-1}
+.admin-list {
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+ gap:15px;
+}
+.admin-item {border:1px solid #eee;border-radius:10px;overflow:hidden}
+.admin-item img {width:100%;height:140px;object-fit:cover}
+.admin-item div {padding:12px}
+.admin-action {
+ border:0;border-radius:8px;padding:9px 13px;
+ color:white;margin:5px 3px;
+}
+.save {background:var(--green)}
+.edit {background:#2474b9}
+.delete {background:var(--red)}
+.cancel {background:#777}
+#preview,.category-preview {
+ width:130px;height:100px;object-fit:cover;
+ display:none;margin-top:8px;border-radius:8px;
+}
+.category-admin {
+ display:grid;grid-template-columns:repeat(2,1fr);gap:15px;
+}
+.category-admin-item {
+ border:1px solid #eee5dc;padding:15px;border-radius:12px;
+}
+.category-admin-item img {
+ width:100%;height:140px;object-fit:cover;
+ border-radius:8px;margin-bottom:10px;
+}
+.category-admin-item input {width:100%}
+
+.login-box {
+ max-width:420px;margin:55px auto;background:white;
+ padding:30px;border-radius:15px;text-align:center;
+ box-shadow:0 8px 30px #0001;
+}
+.login-box input {
+ width:100%;padding:12px;border:1px solid #ddd;
+ border-radius:8px;margin:12px 0;
+}
+.error {color:var(--red);font-weight:700}
+
+footer {
+ text-align:center;padding:22px;
+ background:#302820;color:#eee5dc;margin-top:35px;
+}
+
+@media(max-width:850px) {
+ .category-grid,.product-grid {grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px) {
+ header {align-items:flex-start}
+ nav {gap:10px;font-size:13px}
+ .brand {font-size:18px}
+ .logo {width:43px;height:43px}
+ .hero {padding:35px 7%;min-height:250px}
+ .category-grid,.product-grid {grid-template-columns:repeat(2,1fr);gap:12px}
+ .category-card img {height:140px}
+ .product-card img {height:155px}
+ .products-heading {align-items:flex-start;flex-direction:column}
+ .modal-box {grid-template-columns:1fr;max-height:90vh;overflow-y:auto}
+ .modal-box img {height:220px;min-height:0}
+ .admin-form,.category-admin {grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <a class="brand" href="#" onclick="goHome();return false">
+  <img class="logo" src="logo.png" alt="شعار إبداع" onerror="this.style.display='none'">
+  <span id="headerStoreName">إبداع</span>
+ </a>
+ <nav>
+  <a onclick="goHome()">الرئيسية</a>
+  <a onclick="showAbout()">من نحن</a>
+  <a onclick="goCategories()">الأقسام</a>
+  <a onclick="openAdmin()">لوحة الإدارة</a>
+ </nav>
+</header>
+
+<main class="container">
+
+<section id="homePage">
+ <div class="hero">
+  <div class="hero-content">
+   <p class="eyebrow">إبداع • صناعة بحب وتفاصيل مميزة</p>
+   <h1 id="heroTitle">منتجات يدوية تضيف لمسة جمال لبيتك</h1>
+   <p id="heroDescription">اكتشف منتجاتنا اليدوية المميزة واختر القطعة التي تناسب ذوقك واطلبها بسهولة عبر واتساب.</p>
+   <button class="btn" onclick="goCategories()">تصفح الأقسام</button>
+  </div>
+ </div>
+
+ <div class="section-title">
+  <p class="eyebrow">اكتشف مجموعتنا</p>
+  <h2>أقسام المتجر</h2>
+ </div>
+ <div class="category-grid" id="categoryGrid"></div>
+</section>
+
+<section id="productsPage" class="hidden">
+ <div class="products-heading">
+  <button class="back-btn" onclick="goCategories()">← رجوع للأقسام</button>
+  <div>
+   <p class="eyebrow">اختار اللي يعجبك</p>
+   <h2 id="categoryTitle">المنتجات</h2>
+  </div>
+ </div>
+ <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section id="aboutPage" class="hidden">
+ <div class="about">
+  <p class="eyebrow">حكاية إبداع</p>
+  <h1 id="aboutTitle">من نحن</h1>
+  <p id="aboutText1">إبداع مساحة لعرض المنتجات اليدوية التي تجمع بين الذوق الأصيل والاهتمام بالتفاصيل. نؤمن أن كل قطعة مميزة تحمل لمسة فنية تضيف جمالًا ودفئًا إلى المكان.</p>
+  <p id="aboutText2">هدفنا تقديم منتجات جميلة ومميزة، ومساعدة عملائنا على اختيار القطع التي تناسب ذوقهم.</p>
+  <button class="btn" onclick="goCategories()">شاهد منتجاتنا</button>
+ </div>
+</section>
+
+<section id="loginPage" class="hidden">
+ <div class="login-box">
+  <h2>دخول لوحة الإدارة</h2>
+  <p>دخول تجريبي لصاحب المتجر</p>
+  <input id="adminCode" type="password" placeholder="رمز الدخول">
+  <button class="btn" style="width:100%" onclick="checkLogin()">دخول</button>
+  <p id="loginError" class="error"></p>
+  <small>هذه حماية تجريبية محلية وليست تسجيل دخول Google.</small>
+ </div>
+</section>
+
+<section id="adminPage" class="hidden">
+ <div class="admin-wrap">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+   <h1>لوحة إدارة إبداع</h1>
+   <button class="btn" onclick="logout()">تسجيل الخروج</button>
+  </div>
+
+  <!-- إعدادات محتوى الموقع -->
+  <section class="panel">
+   <h2>التحكم في محتوى الموقع</h2>
+   <p>عدّل اسم المتجر والنصوص وصورة الصفحة الرئيسية وبيانات التواصل.</p>
+
+   <form id="siteSettingsForm" class="admin-form">
+    <div>
+     <label for="settingStoreName">اسم المتجر</label>
+     <input id="settingStoreName" maxlength="50" required>
+    </div>
+
+    <div>
+     <label for="settingWhatsapp">رقم واتساب مع كود الدولة</label>
+     <input id="settingWhatsapp" required placeholder="201155514008">
+    </div>
+
+    <div class="full">
+     <label for="settingHeroTitle">عنوان الصفحة الرئيسية</label>
+     <input id="settingHeroTitle" maxlength="150" required>
+    </div>
+
+    <div class="full">
+     <label for="settingHeroDescription">وصف الصفحة الرئيسية</label>
+     <textarea id="settingHeroDescription"></textarea>
+    </div>
+
+    <div class="full">
+     <label for="settingHeroImage">رابط صورة خلفية الصفحة الرئيسية</label>
+     <input id="settingHeroImage" type="url" required>
+    </div>
+
+    <div class="full">
+     <label for="settingAboutTitle">عنوان صفحة من نحن</label>
+     <input id="settingAboutTitle" maxlength="100">
+    </div>
+
+    <div class="full">
+     <label for="settingAboutText1">النص الأول في صفحة من نحن</label>
+     <textarea id="settingAboutText1"></textarea>
+    </div>
+
+    <div class="full">
+     <label for="settingAboutText2">النص الثاني في صفحة من نحن</label>
+     <textarea id="settingAboutText2"></textarea>
+    </div>
+
+    <div class="full">
+     <button class="admin-action save" type="submit">حفظ تغييرات الموقع</button>
+    </div>
+   </form>
+  </section>
+
+  <!-- إدارة صور الأقسام -->
+  <section class="panel">
+   <h2>إدارة صور الأقسام</h2>
+   <p>غيّر الصورة التي تظهر على بطاقة القسم في الصفحة الرئيسية.</p>
+   <div class="category-admin" id="categoryAdmin"></div>
+  </section>
+
+  <!-- إضافة المنتجات -->
+  <section class="panel">
+   <h2 id="formHeading">إضافة منتج جديد</h2>
+   <form id="adminForm" class="admin-form">
+
+    <div>
+     <label for="name">اسم المنتج</label>
+     <input id="name" required maxlength="80" placeholder="مثال: طبق مزخرف">
+    </div>
+
+    <div>
+     <label for="price">السعر بالجنيه</label>
+     <input id="price" type="number" min="0" step="0.01" required>
+    </div>
+
+    <div>
+     <label for="category">القسم</label>
+     <select id="category" required>
+      <option value="">اختر القسم</option>
+      <option value="plates">أطباق</option>
+      <option value="vases">فازات</option>
+      <option value="mugs">أكواب</option>
+      <option value="frames">إطارات خشبية</option>
+     </select>
+    </div>
+
+    <div>
+     <label for="photo">صورة المنتج</label>
+     <input id="photo" type="file" accept="image/*">
+     <img id="preview" alt="معاينة الصورة">
+    </div>
+
+    <div class="full">
+     <label for="description">وصف المنتج</label>
+     <textarea id="description" placeholder="اكتب وصفًا مختصرًا"></textarea>
+    </div>
+
+    <div class="full">
+     <button class="admin-action save" type="submit" id="submitBtn">إضافة المنتج</button>
+     <button class="admin-action cancel" type="button" id="cancelBtn" hidden>إلغاء التعديل</button>
+    </div>
+   </form>
+  </section>
+
+  <section class="panel">
+   <h2>كل المنتجات</h2>
+   <div class="admin-list" id="adminProducts"></div>
+  </section>
+
+ </div>
+</section>
+
+</main>
+
+<div class="modal hidden" id="productModal">
+ <div class="backdrop" onclick="closeModal()"></div>
+ <div class="modal-box">
+  <button class="close" onclick="closeModal()">×</button>
+  <img id="modalImage" src="" alt="">
+  <div class="modal-info">
+   <p class="eyebrow">تفاصيل المنتج</p>
+   <h2 id="modalName"></h2>
+   <p id="modalDescription"></p>
+   <strong class="product-price" id="modalPrice"></strong>
+   <a class="whatsapp" id="whatsappOrder" target="_blank" rel="noopener">اطلب عبر واتساب</a>
+  </div>
+ </div>
+</div>
+
+<footer>
+ جميع الحقوق محفوظة © <span id="year"></span> <span id="footerStoreName">إبداع</span>
+</footer>
+
+<script>
+/* إعدادات المتجر */
+const WHATSAPP_NUMBER = "201155514008";
+const STORAGE_KEY = "handmadeProducts";
+const CATEGORY_KEY = "ebdaaCategoryImages";
+const SETTINGS_KEY = "ebdaaSiteSettings";
+const ADMIN_CODE = "AM";
+
+const categoryNames = {
+ plates:"الأطباق",
+ vases:"الفازات",
+ mugs:"الأكواب",
+ frames:"الإطارات الخشبية"
+};
+
+const categoryDefaults = {
+ plates:"https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=80",
+ vases:"https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&w=800&q=80",
+ mugs:"https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=80",
+ frames:"https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=800&q=80"
+};
+
+const imageIds = [
+ "photo-1578749556568-bc2c40e68b61",
+ "photo-1576021182211-9ea8dced3690",
+ "photo-1578500494198-246f612d3b3d",
+ "photo-1610701596007-11502861dcfa",
+ "photo-1493106641515-6b5631de4bb9",
+ "photo-1572119865084-43c285814d63",
+ "photo-1577083552431-6e5fd01aa342",
+ "photo-1603006905003-be475563bc59",
+ "photo-1579783902614-a3fb3927b6a5",
+ "photo-1490312278390-ab64016e0aa9",
+ "photo-1603199506016-b9a594b593c0",
+ "photo-1494438639946-1ebd1d20bf85",
+ "photo-1514228742587-6b1558fcca3d",
+ "photo-1576021182211-9ea8dced3690",
+ "photo-1578749556568-bc2c40e68b61"
+];
+
+const groups = [
+ {key:"plates",product:"طبق يدوي",price:180},
+ {key:"vases",product:"فازة يدوية",price:250},
+ {key:"mugs",product:"كوب يدوي",price:120},
+ {key:"frames",product:"إطار خشبي",price:220}
+];
+
+const defaultProducts = groups.flatMap(group =>
+ imageIds.map((imageId,index)=>({
+  id:`${group.key}-${index+1}`,
+  name:`${group.product} ${index+1}`,
+  price:group.price+index*10,
+  category:group.key,
+  description:`قطعة مميزة من قسم ${categoryNames[group.key]}. تواصل معنا للاستفسار عن التفاصيل والتوفر.`,
+  image:`https://images.unsplash.com/${imageId}?auto=format&fit=crop&w=900&q=80`
+ }))
+);
+
+const defaultSettings = {
+ storeName:"إبداع",
+ whatsapp:"201155514008",
+ heroTitle:"منتجات يدوية تضيف لمسة جمال لبيتك",
+ heroDescription:"اكتشف منتجاتنا اليدوية المميزة واختر القطعة التي تناسب ذوقك واطلبها بسهولة عبر واتساب.",
+ heroImage:"https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1600&q=85",
+ aboutTitle:"من نحن",
+ aboutText1:"إبداع مساحة لعرض المنتجات اليدوية التي تجمع بين الذوق الأصيل والاهتمام بالتفاصيل. نؤمن أن كل قطعة مميزة تحمل لمسة فنية تضيف جمالًا ودفئًا إلى المكان.",
+ aboutText2:"هدفنا تقديم منتجات جميلة ومميزة، ومساعدة عملائنا على اختيار القطع التي تناسب ذوقهم."
+};
+
+/* قراءة التخزين */
+function readStorage(key,fallback) {
+ try {
+  const value=localStorage.getItem(key);
+  return value ? JSON.parse(value) : fallback;
+ } catch(e) {
+  return fallback;
+ }
+}
+
+let products=readStorage(STORAGE_KEY,null);
+if(!Array.isArray(products)) {
+ products=defaultProducts;
+ try {localStorage.setItem(STORAGE_KEY,JSON.stringify(products));} catch(e) {}
+}
+
+let categoryImages=readStorage(CATEGORY_KEY,categoryDefaults);
+let siteSettings={
+ ...defaultSettings,
+ ...readStorage(SETTINGS_KEY,{})
+};
+
+let currentCategory=null;
+let editingId=null;
+let newImage="";
+
+function saveProducts() {
+ try {
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(products));
+  return true;
+ } catch(e) {
+  alert("مساحة التخزين ممتلئة. استخدم صورًا أصغر.");
+  return false;
+ }
+}
+
+function saveCategoryImages() {
+ try {
+  localStorage.setItem(CATEGORY_KEY,JSON.stringify(categoryImages));
+  return true;
+ } catch(e) {
+  alert("تعذر حفظ الصورة. اختار صورة أصغر.");
+  return false;
+ }
+}
+
+/* تطبيق إعدادات الموقع */
+function applySiteSettings() {
+ document.title=siteSettings.storeName+" | متجر المنتجات اليدوية";
+
+ document.getElementById("headerStoreName").textContent=siteSettings.storeName;
+ document.getElementById("footerStoreName").textContent=siteSettings.storeName;
+ document.getElementById("heroTitle").textContent=siteSettings.heroTitle;
+ document.getElementById("heroDescription").textContent=siteSettings.heroDescription;
+ document.getElementById("aboutTitle").textContent=siteSettings.aboutTitle;
+ document.getElementById("aboutText1").textContent=siteSettings.aboutText1;
+ document.getElementById("aboutText2").textContent=siteSettings.aboutText2;
+
+ document.querySelector(".hero").style.backgroundImage=
+  `linear-gradient(100deg,#24170ddd,#24170d55), url("${siteSettings.heroImage}")`;
+}
+
+function loadSettingsForm() {
+ document.getElementById("settingStoreName").value=siteSettings.storeName;
+ document.getElementById("settingWhatsapp").value=siteSettings.whatsapp;
+ document.getElementById("settingHeroTitle").value=siteSettings.heroTitle;
+ document.getElementById("settingHeroDescription").value=siteSettings.heroDescription;
+ document.getElementById("settingHeroImage").value=siteSettings.heroImage;
+ document.getElementById("settingAboutTitle").value=siteSettings.aboutTitle;
+ document.getElementById("settingAboutText1").value=siteSettings.aboutText1;
+ document.getElementById("settingAboutText2").value=siteSettings.aboutText2;
+}
+
+document.getElementById("siteSettingsForm").addEventListener("submit",function(event) {
+ event.preventDefault();
+
+ const newSettings={
+  storeName:document.getElementById("settingStoreName").value.trim(),
+  whatsapp:document.getElementById("settingWhatsapp").value.replace(/\D/g,""),
+  heroTitle:document.getElementById("settingHeroTitle").value.trim(),
+  heroDescription:document.getElementById("settingHeroDescription").value.trim(),
+  heroImage:document.getElementById("settingHeroImage").value.trim(),
+  aboutTitle:document.getElementById("settingAboutTitle").value.trim(),
+  aboutText1:document.getElementById("settingAboutText1").value.trim(),
+  aboutText2:document.getElementById("settingAboutText2").value.trim()
+ };
+
+ if(!newSettings.storeName || !newSettings.heroTitle) {
+  alert("اكتب اسم المتجر وعنوان الصفحة الرئيسية.");
+  return;
+ }
+
+ if(!/^https?:\/\//i.test(newSettings.heroImage)) {
+  alert("رابط الصورة لازم يبدأ بـ https:// أو http://");
+  return;
+ }
+
+ if(newSettings.whatsapp.length<10) {
+  alert("راجع رقم واتساب.");
+  return;
+ }
+
+ try {
+  localStorage.setItem(SETTINGS_KEY,JSON.stringify(newSettings));
+  siteSettings=newSettings;
+  applySiteSettings();
+  alert("تم حفظ إعدادات الموقع بنجاح.");
+ } catch(e) {
+  alert("تعذر حفظ الإعدادات.");
+ }
+});
+
+/* التنقل */
+function hidePages() {
+ ["homePage","productsPage","aboutPage","loginPage","adminPage"]
+ .forEach(id=>document.getElementById(id).classList.add("hidden"));
+}
+
+function goHome() {
+ hidePages();
+ document.getElementById("homePage").classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+
+function goCategories() {goHome()}
+
+function showAbout() {
+ hidePages();
+ document.getElementById("aboutPage").classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+
+/* عرض الأقسام */
+function renderCategories() {
+ const grid=document.getElementById("categoryGrid");
+ grid.replaceChildren();
+
+ Object.entries(categoryNames).forEach(([key,title])=>{
+  const items=products.filter(p=>p.category===key);
+  const card=document.createElement("article");
+  card.className="category-card";
+
+  const img=document.createElement("img");
+  img.src=categoryImages[key] || categoryDefaults[key];
+  img.alt=title;
+
+  const info=document.createElement("div");
+  const heading=document.createElement("h3");
+  heading.textContent=title;
+
+  const count=document.createElement("p");
+  count.textContent=items.length+" منتج";
+
+  info.append(heading,count);
+  card.append(img,info);
+  card.onclick=()=>openCategory(key);
+  grid.appendChild(card);
+ });
+}
+
+/* إدارة صور الأقسام */
+function renderCategoryAdmin() {
+ const area=document.getElementById("categoryAdmin");
+ area.replaceChildren();
+
+ Object.entries(categoryNames).forEach(([key,title])=>{
+  const box=document.createElement("div");
+  box.className="category-admin-item";
+
+  const heading=document.createElement("h3");
+  heading.textContent=title;
+
+  const img=document.createElement("img");
+  img.src=categoryImages[key] || categoryDefaults[key];
+  img.alt=title;
+
+  const input=document.createElement("input");
+  input.type="file";
+  input.accept="image/*";
+
+  input.addEventListener("change",()=>{
+   const file=input.files[0];
+   if(!file)return;
+
+   if(!file.type.startsWith("image/")) {
+    alert("اختار صورة صحيحة.");
+    return;
+   }
+
+   if(file.size>1024*1024) {
+    alert("اختار صورة أقل من 1 ميجابايت.");
+    input.value="";
+    return;
+   }
+
+   const reader=new FileReader();
+   reader.onload=()=>{
+    const oldImage=categoryImages[key];
+    categoryImages[key]=reader.result;
+
+    if(!saveCategoryImages()) {
+     categoryImages[key]=oldImage;
+     return;
+    }
+
+    img.src=categoryImages[key];
+    renderCategories();
+    alert("تم تغيير صورة القسم بنجاح.");
+   };
+   reader.readAsDataURL(file);
+  });
+
+  box.append(heading,img,input);
+  area.appendChild(box);
+ });
+}
+
+/* عرض المنتجات */
+function openCategory(category) {
+ currentCategory=category;
+ hidePages();
+ document.getElementById("productsPage").classList.remove("hidden");
+ document.getElementById("categoryTitle").textContent=categoryNames[category];
+ renderProducts();
+ window.scrollTo(0,0);
+}
+
+function renderProducts() {
+ const grid=document.getElementById("productGrid");
+ grid.replaceChildren();
+
+ const items=products.filter(p=>p.category===currentCategory);
+
+ if(!items.length) {
+  grid.textContent="لا توجد منتجات في هذا القسم حاليًا.";
+  return;
+ }
+
+ items.forEach(product=>{
+  const card=document.createElement("article");
+  card.className="product-card";
+
+  const img=document.createElement("img");
+  img.src=product.image || "https://placehold.co/600x400";
+  img.alt=product.name;
+
+  const info=document.createElement("div");
+  info.className="product-info";
+
+  const name=document.createElement("h3");
+  name.textContent=product.name;
+
+  const desc=document.createElement("p");
+  desc.textContent=product.description || "منتج يدوي مميز";
+
+  const price=document.createElement("strong");
+  price.className="product-price";
+  price.textContent=product.price+" جنيه";
+
+  info.append(name,desc,price);
+  card.append(img,info);
+  card.onclick=()=>showProduct(product);
+  grid.appendChild(card);
+ });
+}
+
+/* تفاصيل المنتج */
+function showProduct(product) {
+ document.getElementById("modalImage").src=product.image;
+ document.getElementById("modalImage").alt=product.name;
+ document.getElementById("modalName").textContent=product.name;
+ document.getElementById("modalDescription").textContent=product.description || "";
+ document.getElementById("modalPrice").textContent=product.price+" جنيه";
+
+ const message=`مرحبًا، أريد طلب المنتج: ${product.name} - السعر: ${product.price} جنيه`;
+ document.getElementById("whatsappOrder").href=
+  `https://wa.me/${siteSettings.whatsapp}?text=${encodeURIComponent(message)}`;
+
+ document.getElementById("productModal").classList.remove("hidden");
+}
+
+function closeModal() {
+ document.getElementById("productModal").classList.add("hidden");
+}
+
+/* دخول الإدارة التجريبي */
+function openAdmin() {
+ hidePages();
+
+ if(sessionStorage.getItem("ebdaaAdmin")==="yes") {
+  document.getElementById("adminPage").classList.remove("hidden");
+  renderAdminProducts();
+  renderCategoryAdmin();
+  loadSettingsForm();
+ } else {
+  document.getElementById("loginPage").classList.remove("hidden");
+ }
+
+ window.scrollTo(0,0);
+}
+
+function checkLogin() {
+ const code=document.getElementById("adminCode").value;
+ const error=document.getElementById("loginError");
+
+ if(code===ADMIN_CODE) {
+  sessionStorage.setItem("ebdaaAdmin","yes");
+  document.getElementById("adminCode").value="";
+  error.textContent="";
+  openAdmin();
+ } else {
+  error.textContent="رمز الدخول غير صحيح.";
+ }
+}
+
+function logout() {
+ sessionStorage.removeItem("ebdaaAdmin");
+ openAdmin();
+}
+
+/* عناصر نموذج المنتج */
+const form=document.getElementById("adminForm");
+const nameInput=document.getElementById("name");
+const priceInput=document.getElementById("price");
+const categoryInput=document.getElementById("category");
+const descriptionInput=document.getElementById("description");
+const photoInput=document.getElementById("photo");
+const preview=document.getElementById("preview");
+const adminList=document.getElementById("adminProducts");
+const submitBtn=document.getElementById("submitBtn");
+const cancelBtn=document.getElementById("cancelBtn");
+const heading=document.getElementById("formHeading");
+
+/* عرض المنتجات في الإدارة */
+function renderAdminProducts() {
+ adminList.replaceChildren();
+
+ if(!products.length) {
+  adminList.textContent="لا توجد منتجات.";
+  return;
+ }
+
+ products.forEach(product=>{
+  const card=document.createElement("article");
+  card.className="admin-item";
+
+  const img=document.createElement("img");
+  img.src=product.image || "https://placehold.co/500x350";
+  img.alt=product.name;
+
+  const body=document.createElement("div");
+  const title=document.createElement("strong");
+  title.textContent=product.name;
+
+  const price=document.createElement("p");
+  price.textContent=product.price+" جنيه";
+
+  const edit=document.createElement("button");
+  edit.className="admin-action edit";
+  edit.type="button";
+  edit.textContent="تعديل";
+  edit.onclick=()=>startEdit(product.id);
+
+  const remove=document.createElement("button");
+  remove.className="admin-action delete";
+  remove.type="button";
+  remove.textContent="حذف";
+  remove.onclick=()=>removeProduct(product.id);
+
+  body.append(title,price,edit,remove);
+  card.append(img,body);
+  adminList.appendChild(card);
+ });
+}
+
+/* رفع صورة المنتج */
+photoInput.addEventListener("change",()=>{
+ const file=photoInput.files[0];
+ if(!file)return;
+
+ if(!file.type.startsWith("image/")) {
+  alert("اختار ملف صورة صحيح.");
+  photoInput.value="";
+  return;
+ }
+
+ if(file.size>1024*1024) {
+  alert("اختار صورة أقل من 1 ميجابايت.");
+  photoInput.value="";
+  return;
+ }
+
+ const reader=new FileReader();
+ reader.onload=()=>{
+  newImage=reader.result;
+  preview.src=newImage;
+  preview.style.display="block";
+ };
+ reader.readAsDataURL(file);
+});
+
+/* إضافة وتعديل المنتجات */
+form.addEventListener("submit",event=>{
+ event.preventDefault();
+
+ const name=nameInput.value.trim();
+ const price=Number(priceInput.value);
+ const category=categoryInput.value;
+
+ if(!name || !category || !Number.isFinite(price) || price<0) {
+  alert("راجع الاسم والسعر والقسم.");
+  return;
+ }
+
+ const oldProducts=products.slice();
+
+ if(editingId!==null) {
+  const index=products.findIndex(p=>p.id===editingId);
+  if(index<0)return;
+
+  products[index]={
+   ...products[index],
+   name,price,category,
+   description:descriptionInput.value.trim(),
+   image:newImage || products[index].image || ""
+  };
+ } else {
+  products.push({
+   id:"custom-"+Date.now(),
+   name,price,category,
+   description:descriptionInput.value.trim(),
+   image:newImage
+  });
+ }
+
+ if(!saveProducts()) {
+  products=oldProducts;
+  return;
+ }
+
+ resetForm();
+ renderAdminProducts();
+ renderCategories();
+ alert("تم حفظ المنتج بنجاح.");
+});
+
+function startEdit(id) {
+ const product=products.find(p=>p.id===id);
+ if(!product)return;
+
+ editingId=id;
+ nameInput.value=product.name;
+ priceInput.value=product.price;
+ categoryInput.value=product.category;
+ descriptionInput.value=product.description || "";
+ newImage="";
+
+ if(product.image) {
+  preview.src=product.image;
+  preview.style.display="block";
+ } else {
+  preview.style.display="none";
+ }
+
+ heading.textContent="تعديل المنتج";
+ submitBtn.textContent="حفظ التعديلات";
+ cancelBtn.hidden=false;
+ window.scrollTo(0,0);
+}
+
+function removeProduct(id) {
+ if(!confirm("متأكد إنك عايز تحذف المنتج؟"))return;
+
+ const oldProducts=products.slice();
+ products=products.filter(p=>p.id!==id);
+
+ if(!saveProducts()) {
+  products=oldProducts;
+  return;
+ }
+
+ if(editingId===id)resetForm();
+ renderAdminProducts();
+ renderCategories();
+}
+
+function resetForm() {
+ form.reset();
+ editingId=null;
+ newImage="";
+ preview.removeAttribute("src");
+ preview.style.display="none";
+ heading.textContent="إضافة منتج جديد";
+ submitBtn.textContent="إضافة المنتج";
+ cancelBtn.hidden=true;
+}
+
+cancelBtn.addEventListener("click",resetForm);
+
+/* تشغيل الموقع */
+document.getElementById("year").textContent=new Date().getFullYear();
+renderCategories();
+applySiteSettings();
+
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape")closeModal();
+});
+</script>
+
+</body>
+</html>
